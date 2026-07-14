@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+## custom init
+export UMAIL=petrgoodim@gmail.com
+
+export INIT_PATH="${INIT_PATH:-$PATH}"
+export JAVA_IPATH=/usr/lib/jvm/
+## time to time required 
+#. ~/.sdkman/bin/sdkman-init.sh
+
+main() {
+  source /home/dev/bin/.env
+
+  alias vinit="vim ~/bin/init && . ~/bin/init"
+  alias vEnv="vim ~/bin/.env && . ~/bin/init"
+  
+  
+  ## docker
+  alias dStart="sudo systemctl start docker"
+  alias dStop="sudo systemctl disable --now docker.service docker.socket"
+
+  ## java
+  alias java11="set_java $JAVA_IPATH/java-11-openjdk-amd64"
+  alias java17="set_java $JAVA_IPATH/java-17-openjdk-amd64"
+  alias java21="set_java $JAVA_IPATH/java-21-openjdk-amd64"
+  alias java25="set_java $JAVA_IPATH/java-25-openjdk-amd64"
+  alias java26="set_java $JAVA_IPATH/jdk-26.0.1-oracle-x64"
+
+  ## github
+  alias gitGlobalUserPetroDotGudymGmail="git config --global user.email petro.gudym@gmail.com"
+
+  alias aptI="sudo apt install -y "
+  alias ghAuth='echo "$GITHUB_TOKEN" | gh auth login --with-token'
+
+  alias cl='claude  --model "claude-haiku-4-5" --mcp-config  ~/.claude/custom/mcp_custtom_config.json --strict-mcp-config'
+
+  alias grepfiles='grep -r --files-with-matches'
+
+  python_init
+
+  set_java $JAVA_IPATH/java-21-openjdk-amd64
+}
+
+
+### functions
+
+python_init() {
+  export UV_LINK_MODE=copy
+}
+
+set_java() {
+  export JAVA_HOME="$1"
+  export PATH="$JAVA_HOME/bin:$INIT_PATH"
+  #sudo update-alternatives --set javac "$JAVA_HOME/bin/javac"
+  java -version
+}
+
+main "$@"
+
+echo "Initialized"
