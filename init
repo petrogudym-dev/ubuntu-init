@@ -9,7 +9,7 @@ export JAVA_IPATH=/usr/lib/jvm/
 #. ~/.sdkman/bin/sdkman-init.sh
 
 main() {
-  source /home/dev/bin/.env
+  source ~/bin/.env
 
   alias vinit="vim ~/bin/init && . ~/bin/init"
   alias vEnv="vim ~/bin/.env && . ~/bin/init"
